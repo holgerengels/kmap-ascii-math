@@ -12,15 +12,15 @@ export class KmapAsciiMath extends LitElement {
     }
   `, katexStyles];
 
-  @property({ type: String }) term?: string;
+  @property({ type: String }) expression?: string;
 
   @internalProperty() _html?: string;
 
   protected update(_changedProperties: PropertyValues) {
-    if (_changedProperties.has("term")) {
+    if (_changedProperties.has("expression")) {
       const set = (value:string):void => { this._html = value };
-      if (this.term)
-      math(this.term, set);
+      if (this.expression)
+      math(this.expression, set);
       else
         this._html = "";
     }

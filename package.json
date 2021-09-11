@@ -1,6 +1,6 @@
 {
   "name": "kmap-ascii-math",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Webcomponent kmap-ascii-math following open-wc recommendations",
   "author": "Holger Engels",
   "repository": {

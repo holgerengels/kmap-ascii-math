@@ -15,12 +15,10 @@
     import { html, render } from 'lit-ħtml';
     import '../dist/src/kmap-ascii-math.js';
 
-    const title = 'Hello owc World!';
+    const expression = 'e = lim_(n->oo)(1+1/n)^n';
     render(
       html`
-        <kmap-ascii-math .term=${title}>
-          some light-dom
-        </kmap-ascii-math>
+        <kmap-ascii-math .expression=${expression}></kmap-ascii-math>
       `,
       document.querySelector('#demo')
     );
