@@ -71,16 +71,16 @@ export class KmapAsciiMath extends LitElement {
 
   render() {
     return html`
-      <div style="position: relative; display: inline-block">
-      <svg id="svg">
-        <foreignObject id="object" height="100%" width="100%">
-          <style>${KmapAsciiMath.styles}</style>
-          <div id="math">${unsafeHTML(this._html)}</div>
-        </foreignObject>
-      </svg>
-      <div id="hover" @click="${this._downloadPNG}">${KmapAsciiMath.iconCopy}</div>
-      <img id="image" alt="no"/>
-      </div>
+      <div style="position: relative; display: inline-block" @click="${this._downloadPNG}">
+        <svg id="svg">
+          <foreignObject id="object" height="100%" width="100%">
+            <style>${KmapAsciiMath.styles}</style>
+            <div id="math">${unsafeHTML(this._html)}</div>
+          </foreignObject>
+        </svg>
+        <div id="hover">${KmapAsciiMath.iconCopy}</div>
+        <img id="image" alt="no"/>
+        </div>
     `;
   }
 
