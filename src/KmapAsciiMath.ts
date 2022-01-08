@@ -1,5 +1,6 @@
-import {html, css, LitElement, property, PropertyValues, internalProperty, unsafeCSS, svg} from 'lit-element';
-import {unsafeHTML} from "lit-html/directives/unsafe-html";
+import {html, css, LitElement, PropertyValues, svg} from 'lit';
+import {property, state} from 'lit/decorators.js';
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
 import {math} from "./math.js";
 import {katexStyles} from "./katex-css.js";
 
@@ -29,7 +30,7 @@ export class KmapAsciiMath extends LitElement {
     #hover svg {
       fill: lightgray;
     }
-    :hover > #hover {
+    [hover] > #hover {
       opacity: 1;
     }
     #image {
@@ -42,7 +43,9 @@ export class KmapAsciiMath extends LitElement {
 
   @property({ type: String }) expression?: string;
 
-  @internalProperty() _html?: string;
+  @state() _html?: string;
+
+  @state() _hover: boolean = false;
 
   createRenderRoot() {
     return this;
@@ -64,14 +67,14 @@ export class KmapAsciiMath extends LitElement {
       await this.updateComplete;
       const div = this.renderRoot.querySelector("#math") as HTMLElement;
       const svge = this.renderRoot.querySelector("#svg") as SVGElement;
-      svge.style.width = (div.offsetWidth + 2) + "px";
-      svge.style.height = (div.offsetHeight + 2) + "px";
+      svge.style.width = `${div.offsetWidth + 2  }px`;
+      svge.style.height = `${div.offsetHeight + 2  }px`;
     }
   }
 
   render() {
     return html`
-      <div style="position: relative; display: inline-block" @click="${this._downloadPNG}">
+  <div ?hover="${this._hover}" style="position: relative; display: inline-block" @click="${this._downloadPNG}" @mouseenter="${this._enter}" @mouseleave="${this._leave}" @keydown="${this._keydown}">
         <svg id="svg">
           <foreignObject id="object" height="100%" width="100%">
             <style>${KmapAsciiMath.styles}</style>
@@ -84,17 +87,31 @@ export class KmapAsciiMath extends LitElement {
     `;
   }
 
+  _enter() {
+    this._hover = true;
+  }
+
+  _leave() {
+    this._hover = false;
+  }
+
+  _keydown(e: KeyboardEvent) {
+    console.log(` ${e.code}`);
+  }
+
   _downloadPNG() {
+    this._hover = false;
+
     const div = this.renderRoot.querySelector("#math") as HTMLElement;
     const svge = this.renderRoot.querySelector("#svg") as SVGElement;
     const target = this.renderRoot.querySelector("#image") as HTMLImageElement;
 
-    target.style.width = (div.offsetWidth + 2) + "px";
-    target.style.height = (div.offsetHeight + 2) + "px";
-    svge.style.width = (div.offsetWidth + 2) + "px";
-    svge.style.height = (div.offsetHeight + 2) + "px";
+    target.style.width = `${div.offsetWidth + 2}px`;
+    target.style.height = `${div.offsetHeight + 2}px`;
+    svge.style.width = `${div.offsetWidth + 2}px`;
+    svge.style.height = `${div.offsetHeight + 2}px`;
 
-    target.onload = function() {
+    target.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = (div.offsetWidth + 2);
       canvas.height = (div.offsetHeight + 2);
@@ -105,6 +122,7 @@ export class KmapAsciiMath extends LitElement {
         // @ts-ignore
         // eslint-disable-next-line no-undef
         const data = [new ClipboardItem({ [blob.type]: blob })];
+        // @ts-ignore
         navigator.clipboard.write(data);
       });
     };
