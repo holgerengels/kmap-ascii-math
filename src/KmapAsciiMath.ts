@@ -9,7 +9,6 @@ export class KmapAsciiMath extends LitElement {
   static styles = [css`
     :host {
       display: inline-block;
-      padding: 25px;
       color: var(--kmap-ascii-math-text-color, #000);
     }
     #math {

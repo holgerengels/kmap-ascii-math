@@ -1,5 +1,4 @@
-// @ts-ignore
-import katex from 'katex/dist/katex';
+import katex from 'katex';
 // @ts-ignore
 import AsciiMathParser from 'asciimath2tex';
 
