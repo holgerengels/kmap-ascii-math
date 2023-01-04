@@ -19,6 +19,7 @@ export class KmapAsciiMath extends LitElement {
       position: absolute;
       top: calc(50% - 22px);
       left: calc(50% - 22px);
+      z-index: 1;
       opacity: .0;
       transition: opacity 0.3s ease-in-out;
       background: white;
@@ -50,6 +51,12 @@ export class KmapAsciiMath extends LitElement {
     return this;
   }
 
+  // @ts-ignore
+  updateSlotted({target}) {
+    // @ts-ignore
+    this.term = target.assignedNodes().map((n) => n.textContent).join('');
+  }
+
   protected update(_changedProperties: PropertyValues) {
     if (_changedProperties.has("expression")) {
       const set = (value:string):void => { this._html = value };
@@ -73,7 +80,7 @@ export class KmapAsciiMath extends LitElement {
 
   render() {
     return html`
-  <div ?hover="${this._hover}" style="position: relative; display: inline-block" @click="${this._downloadPNG}" @mouseenter="${this._enter}" @mouseleave="${this._leave}" @keydown="${this._keydown}">
+  <div ?hover="${this._hover}" style="position: relative; display: inline-block; white-space: nowrap" @click="${this._downloadPNG}" @mouseenter="${this._enter}" @mouseleave="${this._leave}" @keydown="${this._keydown}">
         <svg id="svg">
           <foreignObject id="object" height="100%" width="100%">
             <style>${KmapAsciiMath.styles}</style>
@@ -83,6 +90,9 @@ export class KmapAsciiMath extends LitElement {
         <div id="hover">${KmapAsciiMath.iconCopy}</div>
         <img id="image" alt="no"/>
         </div>
+      <div hidden>
+        <slot @slotchange=${this.updateSlotted}></slot>
+      </div>
     `;
   }
 

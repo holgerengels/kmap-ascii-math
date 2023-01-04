@@ -1,6 +1,6 @@
 {
   "name": "kmap-ascii-math",
-  "version": "0.9.15",
+  "version": "0.9.17",
   "description": "Webcomponent kmap-ascii-math following open-wc recommendations",
   "author": "Holger Engels",
   "repository": {
@@ -39,7 +39,7 @@
   "dependencies": {
     "asciimath2tex": "^1.4.0",
     "katex": "^0.16.0",
-    "lit": "^2.4.0"
+    "lit": "^2.5.0"
   },
   "devDependencies": {
     "@open-wc/eslint-config": "^4.3.0",
