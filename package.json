@@ -1,7 +1,8 @@
 {
   "name": "kmap-ascii-math",
-  "version": "0.9.17",
-  "description": "Webcomponent kmap-ascii-math following open-wc recommendations",
+  "version": "0.9.18",
+  "description": "Typeset formula from ascii math",
+  "license": "MIT",
   "author": "Holger Engels",
   "repository": {
     "type": "git",
@@ -17,7 +18,6 @@
     "render",
     "tex"
   ],
-  "license": "MIT",
   "type": "module",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "asciimath2tex": "^1.4.0",
-    "katex": "^0.16.0",
+    "katex": "^0.16.4",
     "lit": "^2.5.0"
   },
   "devDependencies": {
+    "@types/katex": "^0.16.0",
     "@open-wc/eslint-config": "^4.3.0",
     "@open-wc/testing": "next",
-    "@types/katex": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "@web/dev-server": "^0.1.29",
@@ -57,7 +57,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.3.2",
     "tslib": "^2.4.1",
-    "typescript": "~4.8.4"
+    "typescript": "~4.9.4"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
