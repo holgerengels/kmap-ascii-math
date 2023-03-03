@@ -1,6 +1,6 @@
 {
   "name": "kmap-ascii-math",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "description": "Typeset formula from ascii math",
   "license": "MIT",
   "author": "Holger Engels",
